@@ -1,0 +1,71 @@
+<html>
+<head>
+<title> {{ pname }} Sales Report </title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<body></body>
+<div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+
+<script>
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: "{{ pname }} - {{ storename }}"
+            },
+            xAxis: {
+                categories: {{ names|safe }}
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: "Money Earned"
+                }
+            },
+            legend: {
+                reversed: true
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+                series: [{
+                name: 'Saturday',
+                data: {{ tues }}
+            }, {
+                name: 'Friday',
+                data: {{ mon }}
+            }, {
+                name: 'Thursday',
+                data: {{ sun }}
+            }, {
+                name: 'Wednesday',
+                data: {{ sat }}
+            }, {
+                name: 'Tuesday',
+                data: {{ fri }}
+            }, {
+                name: 'Monday',
+                data: {{ thurs }}
+            }, {
+                name: 'Sunday',
+                data: {{ wed }}
+
+            }]
+        });
+ });
+</script>
+
+<form action="/reports/{{ store }}/{{ product_number }}/" method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
+
+</body>
+</html>

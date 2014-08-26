@@ -1,0 +1,72 @@
+<html>
+<head>
+<title> GMP Weekly Report </title>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<body>
+<div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+
+<script>
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'GMP Sales'
+            },
+            xAxis: {
+                categories: {{ names|safe }}
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Money Earned'
+                }
+            },
+            legend: {
+                reversed: true
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+                series: [{
+                name: 'Tuesday',
+                data: {{ tues }}
+            }, {
+                name: 'Monday',
+                data: {{ mon }}
+            }, {
+                name: 'Sunday',
+                data: {{ sun }}
+            }, {
+                name: 'Saturday',
+                data: {{ sat }}
+            }, {
+                name: 'Friday',
+                data: {{ fri }}
+            }, {
+                name: 'Thursday',
+                data: {{ thurs }}
+            }, {
+                name: 'Wednesday',
+                data: {{ wed }}
+
+            }]
+        });
+    });
+</script>
+
+<form action="/reports/{{ filter }}/" method="post">{% csrf_token %}
+{{ form2.as_p }}
+<input type="submit" value="Submit" />
+</form>
+
+</body>
+</html>

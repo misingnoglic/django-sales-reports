@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h4>7-Day Meal Plans</h4>
+<ul>
+<li><a href="/reports/individual">Individual</a></li>
+<li><a href="/reports/family">Family</a></li>
+</ul>
+
+<h4>Reboot, Cleanse & Immersion</h4>
+<ul>
+{% for id,product in rcprods %}
+  <li> <a href="/reports/1/{{ id }}">{{ product }}</a> </li>
+{% endfor %}
+</ul>
+
+<h4>Happy Herbivore</h4>
+<ul>
+{% for id,product in hhprods %}
+  <li> <a href="/reports/2/{{ id }}">{{ product }}</a> </li>
+{% endfor %}
+</ul>
+
+<h4>Exit Strategy School</h4>
+<ul>
+{% for id,product in ess %}
+  <li> <a href="/reports/3/{{ id }}">{{ product }}</a> </li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
+
